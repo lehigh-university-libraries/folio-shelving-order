@@ -17,8 +17,12 @@ FROM tomcat:11.0@sha256:80585828cfe3aa2e12c231761b9f429c49a7a9c30987c6405af96fae
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webapps/
-RUN groupadd -f nobody && \
+RUN mkdir -p /usr/local/tomcat/webapps/ROOT && \
+    echo "OK" > /usr/local/tomcat/webapps/ROOT/healthz && \
+    groupadd -f nobody && \
     useradd -r -s /bin/false -g nobody tomcat && \
     chown -R tomcat /usr/local/tomcat
 
 USER tomcat
+
+HEALTHCHECK CMD curl -f http://localhost:8080/healthz | grep -q OK
