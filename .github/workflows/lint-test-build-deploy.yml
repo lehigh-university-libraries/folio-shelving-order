@@ -32,7 +32,7 @@ jobs:
         run: docker run --rm -d --name fso -p 8080:8080 fso:latest
 
       - name: test
-        run: ./ci/test.sh
+        run: sleep 10 && ./ci/test.sh
 
       - name: cleanup
         if: ${{ always() }}
