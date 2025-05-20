@@ -29,10 +29,14 @@ jobs:
         run: docker build -t fso:latest .
 
       - name: run
-        run: docker run -p 8080:8080 fso:latest -d
+        run: docker run --rm -d --name fso -p 8080:8080 fso:latest
 
       - name: test
         run: ./ci/test.sh
+
+      - name: cleanup
+        if: ${{ always() }}
+        run: docker stop fso
 
   build-push:
     needs: [lint-test]
