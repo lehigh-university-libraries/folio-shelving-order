@@ -25,18 +25,8 @@ jobs:
         with:
           verbose: true
 
-      - name: build
-        run: docker build -t fso:latest .
-
-      - name: run
-        run: docker run --rm -d --name fso -p 8080:8080 fso:latest
-
       - name: test
-        run: sleep 10 && ./ci/test.sh
-
-      - name: cleanup
-        if: ${{ always() }}
-        run: docker stop fso
+        run: ./ci/test.sh
 
   build-push:
     needs: [lint-test]
