@@ -13,3 +13,7 @@ This web service uses [a fork of that library](https://github.com/lehigh-univers
 Deploy the web app is into an application server (Tomcat, Jetty, etc.).
 
 Access at [host:port]/folio-shelving-order/shelf-key?callNumber=123.345+M98765+v.1
+
+## Used By
+
+This is used by [FOLIO Update Local Shelving Order](https://github.com/lehigh-university-libraries/folio-update-local-shelving-order) to update all relevant items with a correct shelving order.
