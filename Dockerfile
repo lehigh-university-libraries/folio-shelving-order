@@ -27,7 +27,7 @@ ARG \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl="${CURL_VERSION}" \
     less="${LESS_VERSION}" && \
-    rm -rf /var/lib/apt/lists ** \
+    rm -rf /var/lib/apt/lists && \
     mkdir -p /usr/local/tomcat/webapps/ROOT && \
     echo "OK" > /usr/local/tomcat/webapps/ROOT/healthz && \
     groupadd -f nobody && \
