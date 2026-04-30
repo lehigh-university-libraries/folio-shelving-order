@@ -17,7 +17,8 @@ FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2a
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webapps/
-RUN mkdir -p /usr/local/tomcat/webapps/ROOT && \
+RUN apt install curl -y && \
+    mkdir -p /usr/local/tomcat/webapps/ROOT && \
     echo "OK" > /usr/local/tomcat/webapps/ROOT/healthz && \
     groupadd -f nobody && \
     useradd -r -s /bin/false -g nobody tomcat && \
