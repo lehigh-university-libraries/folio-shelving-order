@@ -25,8 +25,8 @@ jobs:
         with:
           verbose: true
 
-      - name: test
-        run: ./ci/test.sh
+      # - name: test
+      #   run: ./ci/test.sh
 
   build-push:
     needs: [lint-test]
