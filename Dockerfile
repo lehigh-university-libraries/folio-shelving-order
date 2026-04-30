@@ -17,7 +17,12 @@ FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2a
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webapps/
-RUN apt install curl -y && \
+
+ARG \
+    # renovate: datasource=repology depName=ubuntu_24_04/curl
+    CURL_VERSION=8.5.0-2ubuntu10.8
+
+RUN apt-get install -y --no-install-recommends curl=="${CURL_VERSION}" && \
     mkdir -p /usr/local/tomcat/webapps/ROOT && \
     echo "OK" > /usr/local/tomcat/webapps/ROOT/healthz && \
     groupadd -f nobody && \
