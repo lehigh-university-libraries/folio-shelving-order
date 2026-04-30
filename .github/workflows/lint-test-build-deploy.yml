@@ -30,7 +30,7 @@ jobs:
 
   build-push:
     needs: [lint-test]
-    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@main
+    uses: lehigh-university-libraries/gha/.github/workflows/build-push-ghcr.yaml@0ad0a7d96a7b3a5c05ad811832108d67e3dea92c # main
     permissions:
       contents: read
       packages: write
@@ -38,7 +38,7 @@ jobs:
 
   deploy:
     needs: [build-push]
-    uses: lehigh-university-libraries/gha/.github/workflows/linderman-deploy.yaml@main
+    uses: lehigh-university-libraries/gha/.github/workflows/linderman-deploy.yaml@0ad0a7d96a7b3a5c05ad811832108d67e3dea92c # main
     with:
       url: https://apps-test.lib.lehigh.edu/_rollout
     secrets: inherit
