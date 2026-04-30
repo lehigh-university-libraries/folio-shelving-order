@@ -20,9 +20,13 @@ COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webap
 
 ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/curl
-    CURL_VERSION=8.5.0-2ubuntu10.8
+    CURL_VERSION=8.5.0-2ubuntu10.8 \
+    # renovate: datasource=repology depName=ubuntu_24_04/less
+    LESS_VERSION=590-2ubuntu2.1
 
-RUN apt-get install -y --no-install-recommends curl=="${CURL_VERSION}" && \
+RUN apt-get install -y --no-install-recommends \
+    curl="${CURL_VERSION}" \
+    less="${LESS_VERSION}" && \
     mkdir -p /usr/local/tomcat/webapps/ROOT && \
     echo "OK" > /usr/local/tomcat/webapps/ROOT/healthz && \
     groupadd -f nobody && \
