@@ -1,5 +1,5 @@
-# syntax=docker/dockerfile:1.23.0@sha256:2780b5c3bab67f1f76c781860de469442999ed1a0d7992a5efdf2cffc0e3d769
-FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2ac00e8b2f AS build
+# syntax=docker/dockerfile:1.27.0@sha256:bde3983e9c939224420ddaf6b784cc30e09b035a4dea01f581230c50809f372e
+FROM tomcat:11.0@sha256:b4237a8551b327a88d67c156a943e2db14eb2bcbaa85cbfebd587e0cab9c8885 AS build
 
 WORKDIR /build
 
@@ -13,7 +13,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2ac00e8b2f
+FROM tomcat:11.0@sha256:b4237a8551b327a88d67c156a943e2db14eb2bcbaa85cbfebd587e0cab9c8885
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webapps/
