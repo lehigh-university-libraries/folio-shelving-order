@@ -1,5 +1,5 @@
-# syntax=docker/dockerfile:1.23.0@sha256:2780b5c3bab67f1f76c781860de469442999ed1a0d7992a5efdf2cffc0e3d769
-FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2ac00e8b2f AS build
+# syntax=docker/dockerfile:1.29.0@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
+FROM tomcat:11.0@sha256:94e91501407ed6da44f0fce35e20808922fdab488d9a1643994bdcdd4335d1cc AS build
 
 WORKDIR /build
 
@@ -13,14 +13,14 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM tomcat:11.0@sha256:931b145a361d3aa3033e97dd035dace2fe5bc551abfc5aaa0b341a2ac00e8b2f
+FROM tomcat:11.0@sha256:94e91501407ed6da44f0fce35e20808922fdab488d9a1643994bdcdd4335d1cc
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY --from=build /build/target/folio-shelving-order.war /usr/local/tomcat/webapps/
 
 ARG \
     # renovate: datasource=repology depName=ubuntu_24_04/curl
-    CURL_VERSION=8.5.0-2ubuntu10.8 \
+    CURL_VERSION=8.5.0-2ubuntu10.16 \
     # renovate: datasource=repology depName=ubuntu_24_04/less
     LESS_VERSION=590-2ubuntu2.1
 
